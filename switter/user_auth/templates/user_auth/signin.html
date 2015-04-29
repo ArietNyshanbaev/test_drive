@@ -1,0 +1,144 @@
+{%load staticfiles%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Switter.kg</title>
+	
+    <!-- css -->
+    <link href="{% static 'fonts/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+    
+	<link href="{% static 'css/nivo-lightbox.css'%}" rel="stylesheet" />
+	<link href="{% static 'css/nivo-lightbox-theme/default/default.css'%}" rel="stylesheet" type="text/css" />
+	<link href="{% static 'css/owl.carousel.css'%}" rel="stylesheet" media="screen" />
+    <link href="{% static 'css/owl.theme.css'%}" rel="stylesheet" media="screen" />
+	<link href="{% static 'css/flexslider.css'%}" rel="stylesheet" />
+	<link href="{% static 'css/animate.css'%}" rel="stylesheet" />
+    <link href="{% static 'css/style.css'%}" rel="stylesheet">
+	<link href="{% static 'color/default.css'%}" rel="stylesheet">
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+	
+	
+	
+    <!-- Navigation -->
+    <div id="navigation">
+        <nav class="navbar navbar-custom" role="navigation">
+                              <div class="container">
+                                    <div class="row">
+                                          <div class="col-md-2">
+                                                   <div class="site-logo">
+                                                            <a href="{% url 'blog_app:mainpage'%}" class="brand">Switter.Kg</a>
+                                                    </div>
+                                          </div>
+                                          
+
+                                          <div class="col-md-10">
+                         
+                                                      <!-- Brand and toggle get grouped for better mobile display -->
+                                          <div class="navbar-header">
+                                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                                                <i class="fa fa-bars"></i>
+                                                </button>
+                                          </div>
+                                                      <!-- Collect the nav links, forms, and other content for toggling -->
+                                                      <div class="collapse navbar-collapse" id="menu">
+                                                            <ul class="nav navbar-nav navbar-right">
+                                                                  <li class="active"><a href="{% url 'user_app:signup'%}">регистрация</a></li>
+                                                            </ul>
+                                                      </div>
+                                                      <!-- /.Navbar-collapse -->
+                             
+                                          </div>
+                                    </div>
+                              </div>
+                              <!-- /.container -->
+                        </nav>
+    </div> 
+    <!-- /Navigation -->  
+
+	<!-- Section: about -->
+    <section id="about" class="home-section color-dark bg-white
+    ">
+		<div class="container marginbot-50">
+			<div class="row">
+				<div class="col-lg-6 col-lg-offset-3">
+					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.4s">
+					<div class="section-heading text-center">
+					{% if success_message %}
+						<div class="alert alert-success" role="alert"><br>{{success_message}}<br><br></div>
+						<br><br>
+					{% endif %}
+					<h2 class="h-bold">Вход</h2>
+					<hr>
+					{% if signin_error %}
+							<div class="alert alert-danger" role="alert">{{signin_error}}</div>
+					{% endif %}
+					<div class="divider-header">
+					</div>
+					</div>
+					<form action="{% url 'user_app:signin' %}" method="POST" role="form">
+					{% csrf_token %}
+						<div class="form-group">
+		                    <label for="username">логин:</label>
+		                    <input type="text" class="form-control" id="username" name="username" value="{{username}}" placeholder="введите логин" required>
+		                </div>
+		                <div class="form-group">
+		                    <label for="password">пароль:</label>
+		        
+		                    <input type="password" class="form-control" name="password" id="password" value="{{password}}" placeholder="введите пароль" required>
+		                    
+		                </div>
+		                <div class="span7 text-center">
+		                	<input type='submit' value='войти'  class="btn btn-primary btn-lg btn-block" role="button">
+		                </div>
+		                <br><br><hr><br><br><br><br>
+					</form>
+					
+					</div>
+				</div>
+			</div>
+
+		</div>
+		</section>
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					
+					<div class="text-center">
+						<a href="#about" class="totop"><i class="fa fa-angle-up fa-3x"></i></a>
+
+						<p><br />
+						&copy;Copyright 2015 - Switter. Ariet Nyshanbaev</p>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</footer>
+
+    <!-- Core JavaScript Files -->
+    <script src="{% static 'js/jquery.min.js'%}"></script>	 
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+	<script src="{% static 'js/jquery.sticky.js'%}"></script>
+	<script src="{% static 'js/jquery.flexslider-min.js'%}"></script>
+    <script src="{% static 'js/jquery.easing.min.js'%}"></script>	
+	<script src="{% static 'js/jquery.scrollTo.js'%}"></script>
+	<script src="{% static 'js/jquery.appear.js'%}"></script>
+	<script src="{% static 'js/stellar.js'%}"></script>
+	<script src="{% static 'js/wow.min.js'%}"></script>
+	<script src="{% static 'js/owl.carousel.min.js'%}"></script>
+	<script src="{% static 'js/nivo-lightbox.min.js'%}"></script>
+    <script src="{% static 'js/custom.js'%}"></script>
+
+</body>
+
+</html>

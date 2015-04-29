@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = True
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,'templates'),
     os.path.join(BASE_DIR,'blog','templates','blog'),
+    os.path.join(BASE_DIR,'user_auth','templates','user_auth'),
 )
 
 ALLOWED_HOSTS = []
@@ -41,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'user_auth',
 )
 
 MIDDLEWARE_CLASSES = (

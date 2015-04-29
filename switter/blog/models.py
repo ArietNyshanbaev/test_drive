@@ -20,6 +20,7 @@ class Blog(models.Model):
 	body = models.TextField()
 	category = models.ForeignKey('Category')
 	created = models.DateTimeField(default=datetime.now)
+	user = models.ForeignKey(User)
 
 	def __str__(self):
 		return self.title
@@ -28,6 +29,7 @@ class Coment(models.Model):
 	blog = models.ForeignKey('Blog')
 	coment = models.TextField()
 	created = models.DateTimeField(default=datetime.now)
+	user = models.ForeignKey(User)
 
 	def __str__(self):
 		return self.coment

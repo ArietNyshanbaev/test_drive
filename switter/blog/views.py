@@ -9,16 +9,16 @@ def mainpage(request):
 	#initialize variables
 	args={}
 	args.update(csrf(request))
+	args['user'] = request.user
 
-	if request.POST:
+	if request.POST and request.user.username:
 		title = request.POST['title']
 		description = request.POST['description']
 		body = request.POST['body']
 		category = request.POST['category']
 
 		category = get_object_or_404(Category, pk=category)
-
-		new_post = Blog.objects.create(title=title, description=description, body=body, category=category)
+		new_post = Blog.objects.create(title=title, description=description, body=body, category=category, user=request.user)
 		new_post.save()
 	
 	categories = Category.objects.all()
@@ -32,6 +32,7 @@ def by_category(request, category_id):
 	"""return rendered blogs page for particular category"""
 	#initialize variables
 	args={}
+	args['user'] = request.user
 
 	#getting data form models
 	this_category = get_object_or_404(Category, pk=category_id)
@@ -51,11 +52,12 @@ def post_info(request, post_id):
 	#initialize variables
 	args={}
 	args.update(csrf(request))
+	args['user'] = request.user
 	this_post = get_object_or_404(Blog, pk=post_id)
 	coments = Coment.objects.filter(blog=this_post)
-	if request.POST:
+	if request.POST and request.user.username:
 		coment = request.POST['coment']
-		new_coment = Coment.objects.create(coment=coment,blog=this_post)
+		new_coment = Coment.objects.create(coment=coment, blog=this_post, user=request.user)
 		new_coment.save()
 	#getting data form models
 	args['this_post'] = this_post

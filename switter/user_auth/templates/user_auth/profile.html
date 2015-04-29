@@ -55,9 +55,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     {%if user.username %}
-                        <li><a href="{% url 'user_app:profile' %}">мой профиль</a></li>
+                    <li class="active"><a href="">мой профиль</a></li>
                         <li><a><span data-toggle="modal" data-target="#signout"><span style="cursor:pointer">выйти</span></span></a></li>
                     {% else %}
+
                         <li><a href="{%url 'user_app:signin'%}">войти</a></li>
                         <li><a href="{%url 'user_app:signup'%}">регистрация</a></li>
                     {% endif %}
@@ -76,64 +77,58 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                    {% if user.username %}
-                        <h1>{{user.username}}</h1>
-                        <hr class="small">
-                        
-                        <br><br>
-                    {% endif %}    
+                        {% if user.username %}
+                            <h1>{{user.username}}</h1>
+                            <hr class="small">
+                            <br><br>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-
+    <!-- Here we have maincontent -->
+    <div class="maincontent">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <br>
-            <hr>
-                <h2 class="text-center">
-                    {{this_post.title}}
-                </h2>
-                <br><br>
-                <h4 class="text-center" style="color:orange">
-                    {{this_post.description|linebreaks}}
-                </h4>
-                <br>
-                <h4 class="text-center">
-                    {{this_post.body|linebreaks}}
-                </h4>
-                <br><hr>
-                <h5 style="color:gray">post был добавлен  : {{this_post.created}} пользователем : {{this_post.user.first_name}} {{this_post.user.last_name}} </h5>
-                <hr>
-                <h4 class="text-center">Коментарии:</h4>
-                {% for coment in coments %}
-                <h5>{{coment.user.username}}:</h5>
-                <h5 class="text-center">{{coment.coment}}</h5>
-                <h5><small>{{coment.created}}</small></h5>    
-                <hr>
-                {% endfor %}
-                <form class="form-horizontal" action="" method="POST" id='add_post_form' role="form">
-                {% csrf_token %} 
+    <br><br><br><br><br><br><br><br><br>
+      <div class="row">
 
-                <textarea required name="coment" id="coment" cols="49" rows = "2" form="add_post_form" placeholder="оставь комент..."></textarea>
-                {% if user.username %}
-                <div class="text-center"><input type='submit' value='Добавить koment'  class="btn btn-primary" role="button"></div>
-                {% else %}
-                <div class="alert alert-success" role="alert"><br>Вы должны <a href="{% url 'user_app:signin'%}">авторизоваться</a> для того что б оставить комантарий<br><br></div>
-                        <br><br>
-                {% endif %}
-                </form>
-            </div> 
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+   
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{user.first_name}} {{user.last_name}}</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-2 col-lg-2 " align="center">  </div>
+                <div class=" col-md-8 col-lg-8 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>username:</td>
+                        <td>{{user.username}}</td>
+                      </tr>            
+                      <tr>
+                        <td>Email</td>
+                        <td>{{user.email}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-2 col-lg-2 " align="center">  </div>
+              </div>
+            </div>
+            
+          </div>
         </div>
+      </div>
+      <br><br><br><br><br><br><br><br><br><br><br>
     </div>
-
-    <hr>
-
-    <!-- Exit  model page -->
+    </div>
+    
+<!-- Exit  model page -->
     <div class="modal fade" id="signout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -192,7 +187,6 @@
     <script src="{% static 'js/clean-blog.min.js' %}"></script>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    
 
 </body>
 

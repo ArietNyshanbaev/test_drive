@@ -54,15 +54,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="">мой профиль</a>
-                    </li>
-                    <li>
-                        <a href="">список postov</a>
-                    </li>
-                    <li>
-                        <a><span data-toggle="modal" data-target="#signout"><span style="cursor:pointer">выйти</span></span></a>
-                    </li>
+                    {%if user.username %}
+                        <li><a href="{% url 'user_app:profile' %}">мой профиль</a></li>
+                        <li><a><span data-toggle="modal" data-target="#signout"><span style="cursor:pointer">выйти</span></span></a></li>
+                    {% else %}
+                        <li><a href="{%url 'user_app:signin'%}">войти</a></li>
+                        <li><a href="{%url 'user_app:signup'%}">регистрация</a></li>
+                    {% endif %}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -78,9 +76,12 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1>Zdes imya {{user.first_name}}</h1>
+                    {% if user.username %}
+                        <h1>{{user.username}}</h1>
                         <hr class="small">
-                        <span class="subheading">Zdes slogan{{slogan}}</span>
+                        
+                        <br><br>
+                    {% endif %}   
                         <br><br>
                     </div>
                 </div>
@@ -93,7 +94,7 @@
     <div class="container">
         <div class="row">
         <div class="col-md-3">
-          <h4>Categories</h4>
+          <h4>категории:</h4>
           <h5 style="color:green">{{this_category}}</h5>
           {% for category in categories %}
             <h5><a href="{% url 'blog_app:by_category' category.id %}">{{category.category}}</a></h5>
@@ -102,7 +103,7 @@
         
             <div class="col-md-9">
                 <div class="post-preview">
-                    <h3>Список последних добавленных postov</h3>
+                    <h3>Список артиклов категории {{this_category}}</h3>
                         {% for post in posts%}
                         <a href="{% url 'blog_app:post_info' post.id %}">
                             <h2 class="post-title">
@@ -113,7 +114,7 @@
                             </h3>
                         </a>
                         
-                        <p class="post-meta">пользователь: {{post.created}}</p>
+                        <p class="post-meta">пользователь:{{post.user.username}} {{post.created}}</p>
                         
                         {% endfor%}
                     
@@ -137,7 +138,7 @@
                 <h4>вы уверены что хотите выйти?</h4>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                    <a href=""><button type="button" class="btn btn-primary">Выйти</button></a>
+                    <a href="{% url 'user_app:signout'%}"><button type="button" class="btn btn-primary">Выйти</button></a>
                 </div>
             </div>
         </div>
