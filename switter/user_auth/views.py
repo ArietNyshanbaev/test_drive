@@ -92,7 +92,7 @@ def signup(request):
 		email_in_use = all_users.filter(email=email)
 		if email_in_use.count() > 0:
 			validation = False
-			args['email_error'] = 'Этот email уже используется, используйте другой polzovatel'
+			args['email_error'] = 'Этот email уже используется, используйте другой ползователь'
 			args['email'] = email 
 		else:
 			args['email'] = email

@@ -19,7 +19,8 @@ def mainpage(request):
 
 		category = get_object_or_404(Category, pk=category)
 		new_post = Blog.objects.create(title=title, description=description, body=body, category=category, user=request.user)
-		new_post.save()
+		if new_post.full_clean():
+			new_post.save()
 	
 	categories = Category.objects.all()
 	last_posts = Blog.objects.all().order_by('-created')[:15]
@@ -38,7 +39,7 @@ def by_category(request, category_id):
 	this_category = get_object_or_404(Category, pk=category_id)
 	categories = Category.objects.all().exclude(pk=category_id).order_by('category')
 	posts = Blog.objects.filter(category=this_category)
-	#sort news by date so that last news pop up first
+	
 	#context data initialization into dictionary 'args'
 	args['this_category'] = this_category
 	args['categories'] = categories
@@ -58,7 +59,8 @@ def post_info(request, post_id):
 	if request.POST and request.user.username:
 		coment = request.POST['coment']
 		new_coment = Coment.objects.create(coment=coment, blog=this_post, user=request.user)
-		new_coment.save()
+		if new_coment.full_clean():
+			new_coment.save()
 	#getting data form models
 	args['this_post'] = this_post
 	args['coments'] = coments
